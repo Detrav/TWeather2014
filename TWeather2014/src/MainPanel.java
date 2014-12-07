@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.event.*;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
@@ -65,10 +66,11 @@ public class MainPanel extends JPanel implements Runnable {
                 delta = System.currentTimeMillis() - lastTime;
                 lastTime = System.currentTimeMillis(); 
                 this.repaint();
+                
                 Do(delta);
-                if(delta<16)
+                if(delta<32)
 					try {
-						Thread.sleep(16L-delta);
+						Thread.sleep(32L-delta);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -117,23 +119,24 @@ public class MainPanel extends JPanel implements Runnable {
     	//Snow.Do();
       super.paintComponent ( g );
 
-      Graphics2D g2d = ( Graphics2D ) g;
+      Graphics2D g2d = (Graphics2D)  g.create();
       g2d.setRenderingHint ( RenderingHints.KEY_ANTIALIASING,
           RenderingHints.VALUE_ANTIALIAS_ON );
 
       g2d.setComposite ( AlphaComposite.getInstance ( AlphaComposite.SRC_OVER, 0.5f ) );
       g2d.setPaint ( Color.GRAY );
       //Graphics2D g2 = ( Graphics2D )g.create();
-      Snow.Draw(g2d);
+      Point p = MouseInfo.getPointerInfo().getLocation();
+      Snow.Draw(g2d,p);
       //g2d.fill ( new  );
       
       //Area area = new Area ( new Ellipse2D.Double ( 0, 0, getWidth (), getHeight () ) );
       //area.subtract ( new Area (
           //new Ellipse2D.Double ( 25, 25, getWidth () - 50, getHeight () - 50 ) ) );
       //g2d.fill ( area );
-      MouseInfo.getPointerInfo().getLocation();
       //g2d
       //paint = true;
+      g2d.dispose();
     }
 
     public Dimension getPreferredSize ()

@@ -51,7 +51,7 @@ public class Particle {
 		}
 	}
 	
-	void Draw(Graphics2D g2d)
+	void Draw(Graphics2D g2d,Point p)
 	{
 		//g2d.setPaint ( Color.GRAY );
 		//Area area = new Area ( new Ellipse2D.Double ( 0, 0, 50, 50 ) );
@@ -62,6 +62,7 @@ public class Particle {
 		//java.util.concurrent.TimeUnit.SECONDS.sleep(1);
 		for(ParticleElement el : elements)
 		{
+			if((el.x1-p.x)*(el.x1-p.x)+(el.y1-p.y)*(el.y1-p.y)>1000)
 			g2d.drawImage(img, el.x1, el.y1, el.s, el.s ,null);
 		}
 		
