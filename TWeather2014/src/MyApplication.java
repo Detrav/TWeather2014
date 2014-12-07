@@ -52,6 +52,7 @@ public class MyApplication extends JFrame {
 	    //setLocationRelativeTo(null);
 	    AWTUtilities.setWindowOpaque ( this, false );
 	    pack ();
+	    contentPane.start();
 	}
 
 }
